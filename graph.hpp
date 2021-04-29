@@ -3,7 +3,6 @@
 #include <functional>
 #include <unordered_map>
 #include <unordered_set>
-#include <list>
 
 namespace strukdat {
 
@@ -136,7 +135,7 @@ class graph {
     bool *visited = new bool[root];
     for(int i = 0; i < root; i++) visited[i] = false;
     
-    std::list<VertexType> queue;
+    std::vector<VertexType> queue;
     VertexType vertexHelp = root;
     adj_list_type _adj_list_check = _adj_list;
 
@@ -145,7 +144,7 @@ class graph {
 
     while (!queue.empty()){
     	vertexHelp = queue.front();
-    	queue.pop_front();
+    	queue.erase(queue.begin());
     	func(vertexHelp);
 
     	for(auto i = _adj_list_check[vertexHelp].begin();
@@ -156,7 +155,6 @@ class graph {
     				queue.push_back(*i);
     			}
     	}
-
     }
   }
 
